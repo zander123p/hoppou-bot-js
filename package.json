@@ -1,0 +1,20 @@
+{
+  "name": "hoppou-bot",
+  "version": "1.0.0",
+  "description": "A bot to manage the Hoppou Paradise Server",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "sequelize": "^6.3.4",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hoppou"
+  ],
+  "author": "Sakura",
+  "license": "ISC"
+}
