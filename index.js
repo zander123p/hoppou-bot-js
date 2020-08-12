@@ -1,7 +1,8 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const Sequelize = require('sequelize');
-const { prefix, token, logChannel } = require('./config.json');
+
+const prefix = process.env.PREFIX;
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -133,4 +134,4 @@ function getUserFromMention(mention) {
     return client.users.cache.get(id);
 }
 
-client.login(token);
+client.login(process.env.TOKEN);
