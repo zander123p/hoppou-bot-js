@@ -99,8 +99,17 @@ module.exports = {
 
         data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 
+        const embed = new Discord.MessageEmbed()
+        .setColor('#158559')
+        .setTitle(FirstUpperCase(command.name));
 
-        message.channel.send(data, { split: true });
+        if (command.aliases) embed.addField('Aliases', command.aliases.join(', '));
+        if (command.description) embed.addField('Description', command.description);
+        if (command.usage) embed.addField('Usage', `${guildConf.prefix}${command.name} ${command.usage}`);
+
+        embed.addField('Cooldown', `${command.cooldown || 3} second(s)`);
+
+        message.channel.send(embed);
     },
 };
 

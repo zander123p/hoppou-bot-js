@@ -134,7 +134,7 @@ client.on('message', async msg => {
 
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     
-    if (!command) return msg.reply(`the command '${commandName}' does not exsit. Please make sure you typed it correctly!`);
+    if (!command) return msg.reply(`the command '${commandName}' does not exsit. Please make sure you typed it correctly!\nFor a list of all commands, type \`${guildConf.prefix}help\``);
 
     if (command.guildOnly && msg.channel.type === 'dm') return msg.reply('I can\'t execute that command inside DMs!');
 
@@ -169,7 +169,7 @@ client.on('message', async msg => {
 
     timestamps.set(msg.author.id, now);
     setTimeout(() => timestamps.delete(msg.author.id), cooldownAmount);
-
+    
     try {
         command.execute(msg, args);
     } catch (error) {
@@ -178,20 +178,20 @@ client.on('message', async msg => {
     }
 });
 
-function getUserFromMention(mention) {
+function getDirectories(path) {
+    return fs.readdirSync(path).filter(function (file) {
+      return fs.statSync(path+'/'+file).isDirectory();
+    });
+}
+
+Discord.Message.prototype.getUserFromMention = function(mention) {
     const matches = mention.match(/^<@!?(\d+)>$/);
 
     if (!matches) return;
 
     const id = matches[1];
 
-    return client.users.cache.get(id);
-}
-
-function getDirectories(path) {
-    return fs.readdirSync(path).filter(function (file) {
-      return fs.statSync(path+'/'+file).isDirectory();
-    });
-  }
+    return this.client.users.cache.get(id);
+};
 
 client.login(process.env.TOKEN);

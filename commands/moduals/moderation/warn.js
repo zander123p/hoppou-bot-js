@@ -6,7 +6,7 @@ module.exports = {
     args: 2,
     usage: '<user> <reason>',
     execute(message, args) {
-        const target = getUserFromMention(message.client, args[0]);
+        const target = message.getUserFromMention(args[0]);
         const reason = args.slice(1).join(' ');
         const newActionId = message.client.modActions.autonum;
         message.client.userProfiles.ensure(target.id, {
@@ -30,13 +30,3 @@ module.exports = {
         message.channel.send(`${target} was warned for \'${reason}\'`);
     },
 };
-
-function getUserFromMention(client, mention) {
-    const matches = mention.match(/^<@!?(\d+)>$/);
-
-    if (!matches) return;
-
-    const id = matches[1];
-
-    return client.users.cache.get(id);
-}
