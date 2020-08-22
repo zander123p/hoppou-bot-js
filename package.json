@@ -4,7 +4,10 @@
   "description": "A bot to manage the Hoppou Paradise Server",
   "main": "index.js",
   "dependencies": {
+    "better-sqlite3": "^7.1.0",
     "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "enmap": "^5.6.2",
     "sequelize": "^6.3.4",
     "sqlite3": "^5.0.0"
   },
